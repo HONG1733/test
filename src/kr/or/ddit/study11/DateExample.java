@@ -2,18 +2,75 @@ package kr.or.ddit.study11;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 
 public class DateExample {
-	
 	static boolean deb = false;
+	Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		DateExample de =new DateExample();
 //		de.method1();
-		de.method2();
-		de.method3();
-		de.method4();
+//		de.method2();
+//		de.method3();
+//		de.method4();
+//		de.method5();
+//		de.method6();
+		de.method7();
+	}
+	
+	private void method7() {
+		Calendar cal = Calendar.getInstance();//캘린더는 싱글톤으로 이루어져있다.
+		
+//		cal.set(Calendar.YEAR, 2022);
+//		cal.set(Calendar.MONTH, 1);
+//		cal.set(Calendar.HOUR, 9);
+		
+		cal.add(Calendar.DATE, -100);
+		
+		Date d = cal.getTime();
+		System.out.println(d);
+		
+	}
+	
+	private void method6() {
+		/*
+		 *  오늘 날짜로 부터 스캐너를 통해 입력 받은 날짜 만큼 더하기.
+		 *  ex) 10 -> 2024.01.27
+		 */
+		
+		Date d = new Date();
+		System.out.println("더할 날짜를 입력 해주세요.");
+		long time = 86400*1000*sc.nextLong();
+		Date d2 = new Date(d.getTime()+time);
+		System.out.println(d);
+		System.out.println(d2);
+		SimpleDateFormat sdf =new SimpleDateFormat("yyyy.MM.dd");
+		System.out.println(sdf.format(d2));
+	}
+	
+	private void method5() {
+		
+		
+		System.out.println("날짜(ex : 2024.01.17) : ");
+		String str = sc.next();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+	    try {
+			Date d = sdf.parse(str);
+			System.out.println(d);
+			
+			Date cur = new Date();
+			
+			long time = d.getTime() - cur.getTime();
+			double day = (double)time/86400/1000;
+			System.out.println(day);
+			
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void method4() {
